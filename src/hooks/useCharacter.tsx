@@ -23,7 +23,10 @@ export const useCharacter = (url: string) => {
       const response = await fetch(url)
       const data = await response.json()
 
-      if (data) {
+      const statusOk = data?.status === 'Ok'
+      const statusCode = data?.code === 200
+
+      if (statusOk && statusCode) {
         setCharacters(data?.data?.results)
         setLoading(false)
       } else {
